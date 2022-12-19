@@ -22,7 +22,7 @@ public class PolandNotation08 {
 
     public static List<String> getListString(String suffixExpression){
         String[] split = suffixExpression.split(" ");
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<String>();
         for (String ele : split) {
             list.add(ele);
         }
@@ -30,7 +30,7 @@ public class PolandNotation08 {
     }
 
     public static int calculate(List<String> ls){
-        Stack<String> stack = new Stack<>();
+        Stack<String> stack = new Stack<String>();
         for (String item : ls) {
             //使用正则表达式取出数
             if(item.matches("\\d+")){ //匹配多位数

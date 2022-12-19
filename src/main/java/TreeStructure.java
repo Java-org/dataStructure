@@ -13,7 +13,7 @@ public class TreeStructure {
         List<DepNode> depNodes = deptTree.buildTree(data);
         System.out.println(depNodes);
         for (DepNode depNode : depNodes) {
-            Stack<DepNode> pathstack = new Stack<>();
+            Stack<DepNode> pathstack = new Stack<DepNode>();
             deptTree.iteratorNode(depNode, pathstack);
         }
 
@@ -23,7 +23,7 @@ public class TreeStructure {
         pathstack.push(depNode);
         List<DepNode> childId = depNode.getChildId();
         if (childId == null){
-            ArrayList<DepNode> depNodes = new ArrayList<>();
+            ArrayList<DepNode> depNodes = new ArrayList<DepNode>();
             Iterator<DepNode> stackNode = pathstack.iterator();
             while (stackNode.hasNext()){
                 depNodes.add(stackNode.next());
@@ -42,13 +42,13 @@ public class TreeStructure {
     }
 
     private List<DepNode> buildTree(List<DepNode> depNodes){
-        ArrayList<DepNode> topDepNodes = new ArrayList<>();
+        ArrayList<DepNode> topDepNodes = new ArrayList<DepNode>();
         for (DepNode depNode : depNodes) {
             if("-1".equals(depNode.getParentId())){
                 topDepNodes.add(depNode);
             }
         }
-        ArrayList<DepNode> result = new ArrayList<>();
+        ArrayList<DepNode> result = new ArrayList<DepNode>();
         for (DepNode topDepNode : topDepNodes) {
             DepNode child = this.getChild(topDepNode, depNodes);
             result.add(child);
@@ -57,7 +57,7 @@ public class TreeStructure {
     }
 
     private DepNode getChild(DepNode parent, List<DepNode> depNodes){
-        ArrayList<DepNode> childList = new ArrayList<>();
+        ArrayList<DepNode> childList = new ArrayList<DepNode>();
         for (DepNode depNode : depNodes) {
             if(parent.getDeptId().equals(depNode.getParentId())){
                 childList.add(this.getChild(depNode, depNodes));

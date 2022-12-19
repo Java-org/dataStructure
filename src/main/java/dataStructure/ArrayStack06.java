@@ -11,28 +11,22 @@ public class ArrayStack06 {
 
         while (loop){
             key = scanner.next();
-            switch(key){
-                case "show":
-                    stack.list();
-                    break;
-                case "push":
-                    System.out.println("请输入一个数");
-                    int value = scanner.nextInt();
-                    stack.push(value);
-                    break;
-                case "pop":
-                    try{
-                        int res = stack.pop();
-                        System.out.printf("出栈的数据是 %d",res);
-                    }catch(Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                case "exit":
-                    scanner.close();
-                    loop = false;
-                default:
-                    break;
+            if ("show".equals(key)) {
+                stack.list();
+            } else if ("push".equals(key)) {
+                System.out.println("请输入一个数");
+                int value = scanner.nextInt();
+                stack.push(value);
+            } else if ("pop".equals(key)) {
+                try {
+                    int res = stack.pop();
+                    System.out.printf("出栈的数据是 %d", res);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if ("exit".equals(key)) {
+                scanner.close();
+                loop = false;
             }
         }
         System.out.println("程序退出");

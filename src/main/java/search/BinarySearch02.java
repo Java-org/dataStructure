@@ -21,7 +21,7 @@ public class BinarySearch02 {
         }else if(value>midValue){
             return binarySearch(arr,m+1,r,value);
         }else{
-            ArrayList<Integer> resIndexList = new ArrayList<>();
+            ArrayList<Integer> resIndexList = new ArrayList<Integer>();
             int tmp =m-1;//继续往左遍历
             while(true){
                 if(tmp<0||arr[tmp] !=value){
