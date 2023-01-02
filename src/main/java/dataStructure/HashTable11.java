@@ -16,29 +16,24 @@ public class HashTable11 {
             System.out.println("exit: 退出系统");
 
             key = scanner.next();
-            switch (key) {
-                case "add":
-                    System.out.println("输入id");
-                    int id = scanner.nextInt();
-                    System.out.println("输入名字");
-                    String name = scanner.next();
-                    // 创建 雇员
-                    Emp emp = new Emp(id, name);
-                    hashTab.add(emp);
-                    break;
-                case "list":
-                    hashTab.list();
-                    break;
-                case "find":
-                    System.out.println("请输入要查找的id");
-                    id = scanner.nextInt();
-                    hashTab.findEmpById(id);
-                    break;
-                case "exit":
-                    scanner.close();
-                    System.exit(0);
-                default:
-                    break;
+            if ("add".equals(key)) {
+                System.out.println("输入id");
+                int id = scanner.nextInt();
+                System.out.println("输入名字");
+                String name = scanner.next();
+                // 创建 雇员
+                Emp emp = new Emp(id, name);
+                hashTab.add(emp);
+            } else if ("list".equals(key)) {
+                hashTab.list();
+            } else if ("find".equals(key)) {
+                int id;
+                System.out.println("请输入要查找的id");
+                id = scanner.nextInt();
+                hashTab.findEmpById(id);
+            } else if ("exit".equals(key)) {
+                scanner.close();
+                System.exit(0);
             }
         }
     }
