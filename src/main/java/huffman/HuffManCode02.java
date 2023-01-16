@@ -2,6 +2,7 @@ package huffman;
 
 import jdk.nashorn.internal.ir.CallNode;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -36,6 +37,7 @@ public class HuffManCode02 {
 //            System.out.println(b);
 //        }
         System.out.println(bytes.length);
+        fileZip("D:\\java\\dataStructure\\src\\main\\java\\huffman\\yifei.png","D:\\java\\dataStructure\\src\\main\\java\\huffman", huffmanCodes);
     }
 
     //解码
@@ -214,6 +216,62 @@ public class HuffManCode02 {
             root.preOrder();
         }else{
             System.out.println("根节点不为空，不能遍历");
+        }
+    }
+
+    //压缩文件
+    public static void fileZip(String src, String dst, Map<Byte, String> huffmanCodes){
+        //输出流
+        OutputStream os = null;
+        ObjectOutputStream oos = null;
+        //输入流
+        FileInputStream is = null;
+        try{
+            is = new FileInputStream(src);
+            //创建字节数组作为缓冲块
+            byte[] b = new byte[is.available()];
+            is.read(b);
+            byte[] huffmanBytes = Huffmanzip(b, huffmanCodes);
+            os = new FileOutputStream(dst);
+            oos = new ObjectOutputStream(os);
+            oos.writeObject(huffmanBytes);
+            oos.writeObject(huffmanCodes);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            try{
+                is.close();
+                oos.close();
+                os.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    //解压文件
+    public static void fileUnZip(String zipFile, String dst){
+        InputStream is = null;
+        ObjectInputStream ois = null;
+        OutputStream os = null;
+        try{
+            is = new FileInputStream(zipFile);
+            ois = new ObjectInputStream(is);
+            byte[] huffmanBytes = (byte[])ois.readObject();
+            Map<Byte, String> huffmanCodes = (Map<Byte, String>)ois.readObject();
+            byte[] bytes = huffmanDecode(huffmanCodes, huffmanBytes);
+            os = new FileOutputStream(dst);
+            os.write(bytes);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            try{
+                os.close();
+                ois.close();
+                is.close();
+            } catch (Exception e2){
+                System.out.println(e2.getMessage());
+            }
         }
     }
 }
